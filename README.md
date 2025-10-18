@@ -1,36 +1,112 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+# 🧭 Property Weather Service Frontend
 
-First, run the development server:
+A modern web application built using [Next.js](https://nextjs.org/) — a React framework for building fast, scalable web apps with built-in routing, API routes, and server-side rendering.
+
+---
+
+## 🚀 Getting Started
+
+### 1️⃣ Clone the repository
+```bash
+git clone https://github.com/<your-username>/<your-repo>.git
+cd <your-repo>
+```
+
+### 2️⃣ Install dependencies
+
+Make sure you have [Node.js](https://nodejs.org/) ≥ 18 installed.
+
+```bash
+npm install
+```
+
+### 3️⃣ Run the development server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then open your browser and visit:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+👉 [http://localhost:3000](http://localhost:3000)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## ⚙️ Available Scripts
 
-To learn more about Next.js, take a look at the following resources:
+| Command         | Description                                        |
+| --------------- | -------------------------------------------------- |
+| `npm run dev`   | Starts the development server (hot reload enabled) |
+| `npm run build` | Builds the app for production                      |
+| `npm run start` | Runs the built app in production mode              |
+| `npm run lint`  | Runs ESLint for code quality                       |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🧰 Environment Variables
 
-## Deploy on Vercel
+Create a `.env` file in the root directory:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```
+NEXT_PUBLIC_API_URL=http://localhost:5000
+NEXT_PUBLIC_APP_ENV=development
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+> Restart your dev server after adding or changing env vars.
+
+---
+
+## 🧑‍💻 Tech Stack
+
+* ⚛️ **React 18+**
+* 🧱 **Next.js 14+**
+* 💨 **Tailwind CSS** (optional)
+* 🔐 **TypeScript** (optional)
+* ⚡ **ESLint + Prettier**
+
+---
+
+## 🏗️ Production Build
+
+To generate and serve a production build:
+
+```bash
+npm run build
+npm start
+```
+
+The app will be available at [http://localhost:3000](http://localhost:3000).
+
+---
+
+## 🧩 Deployment
+
+You can deploy this app easily using:
+
+* [Vercel (Recommended)](https://vercel.com)
+* [Netlify](https://www.netlify.com)
+* [Render](https://render.com)
+* or any Node.js hosting platform.
+
+---
+
+
+
+### 💡 Tip
+
+If you’re using **pnpm** or **yarn**, just replace commands:
+
+```bash
+pnpm install
+pnpm dev
+# or
+yarn install
+yarn dev
+```
+
+---
+
+**Happy coding! ✨**
+
+
