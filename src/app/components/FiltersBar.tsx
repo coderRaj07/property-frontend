@@ -22,7 +22,7 @@ export const FiltersBar = ({ filters, setFilters, onApply }: FiltersProps) => {
   };
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFilters((prev: any) => ({ ...prev, search: e.target.value }));
+    setFilters((prev: any) => ({ ...prev, searchText: e.target.value }));
   };
 
   const InfoIcon = ({ label, text }: { label: string; text: string }) => (
