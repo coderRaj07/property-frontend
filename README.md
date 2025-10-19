@@ -76,7 +76,7 @@ npm run build
 npm start
 ```
 
-The app will be available at [http://localhost:3000](http://localhost:3000).
+The app will be available at [http://localhost:3000/properties](http://localhost:3000/properties).
 
 ---
 
