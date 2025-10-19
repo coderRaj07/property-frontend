@@ -29,8 +29,7 @@ npm run dev
 
 Then open your browser and visit:
 
-👉 [http://localhost:3000](http://localhost:3000)
-
+👉 [http://localhost:3000/properties](http://localhost:3000/properties).
 ---
 
 ## ⚙️ Available Scripts
