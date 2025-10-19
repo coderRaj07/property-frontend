@@ -9,8 +9,8 @@ A modern web application built using [Next.js](https://nextjs.org/) — a React 
 
 ### 1️⃣ Clone the repository
 ```bash
-git clone https://github.com/<your-username>/<your-repo>.git
-cd <your-repo>
+git clone https://github.com/coderRaj07/property-frontend
+cd property-frontend
 ```
 
 ### 2️⃣ Install dependencies
