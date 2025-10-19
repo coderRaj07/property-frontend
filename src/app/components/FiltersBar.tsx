@@ -1,7 +1,8 @@
 "use client";
-import { useState, useEffect } from "react";
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
+import { Info } from "lucide-react"; // lightweight icon library
+import { useState } from "react";
 
 interface FiltersProps {
   filters: any;
@@ -10,17 +11,7 @@ interface FiltersProps {
 }
 
 export const FiltersBar = ({ filters, setFilters, onApply }: FiltersProps) => {
-  const [errors, setErrors] = useState<{ temp?: string; humidity?: string }>({});
-
-  // 🔍 Validation check
-  useEffect(() => {
-    const newErrors: any = {};
-    if (filters.tempMin > filters.tempMax)
-      newErrors.temp = "Min temperature cannot exceed max temperature";
-    if (filters.humidityMin > filters.humidityMax)
-      newErrors.humidity = "Min humidity cannot exceed max humidity";
-    setErrors(newErrors);
-  }, [filters]);
+  const [hovered, setHovered] = useState<string | null>(null);
 
   const handleSliderChange = (key: string, value: number) => {
     setFilters((prev: any) => ({ ...prev, [key]: value }));
@@ -31,8 +22,23 @@ export const FiltersBar = ({ filters, setFilters, onApply }: FiltersProps) => {
   };
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFilters((prev: any) => ({ ...prev, searchText: e.target.value }));
+    setFilters((prev: any) => ({ ...prev, search: e.target.value }));
   };
+
+  const InfoIcon = ({ label, text }: { label: string; text: string }) => (
+    <span
+      className="relative inline-flex items-center ml-2 text-gray-500 cursor-pointer"
+      onMouseEnter={() => setHovered(label)}
+      onMouseLeave={() => setHovered(null)}
+    >
+      <Info size={14} />
+      {hovered === label && (
+        <span className="absolute z-10 top-6 left-0 bg-gray-800 text-white text-xs p-2 rounded-md w-48 shadow-lg">
+          {text}
+        </span>
+      )}
+    </span>
+  );
 
   return (
     <div className="p-5 bg-white rounded-2xl shadow-sm space-y-4">
@@ -43,9 +49,14 @@ export const FiltersBar = ({ filters, setFilters, onApply }: FiltersProps) => {
         onChange={handleSearchChange}
       />
 
-      {/* 🌡 Temperature */}
       <div>
-        <label className="text-sm font-medium">Min Temperature (°C)</label>
+        <label className="text-sm font-medium flex items-center">
+          Min Temperature (°C)
+          <InfoIcon
+            label="tempMin"
+            text="Minimum air temperature to filter properties (range -20°C to 50°C)."
+          />
+        </label>
         <Slider
           min={-20}
           max={50}
@@ -53,9 +64,15 @@ export const FiltersBar = ({ filters, setFilters, onApply }: FiltersProps) => {
           onChange={(v) => handleSliderChange("tempMin", v as number)}
         />
         <p className="text-xs text-gray-500">{filters.tempMin ?? -20}°C</p>
+      </div>
 
-        <label className="text-sm font-medium mt-2 block">
+      <div>
+        <label className="text-sm font-medium flex items-center">
           Max Temperature (°C)
+          <InfoIcon
+            label="tempMax"
+            text="Maximum air temperature allowed for search results."
+          />
         </label>
         <Slider
           min={-20}
@@ -64,15 +81,16 @@ export const FiltersBar = ({ filters, setFilters, onApply }: FiltersProps) => {
           onChange={(v) => handleSliderChange("tempMax", v as number)}
         />
         <p className="text-xs text-gray-500">{filters.tempMax ?? 50}°C</p>
-
-        {errors.temp && (
-          <p className="text-xs text-red-500 mt-1">{errors.temp}</p>
-        )}
       </div>
 
-      {/* 💧 Humidity */}
       <div>
-        <label className="text-sm font-medium">Min Humidity (%)</label>
+        <label className="text-sm font-medium flex items-center">
+          Min Humidity (%)
+          <InfoIcon
+            label="humidityMin"
+            text="Lowest humidity level acceptable (dryness)"
+          />
+        </label>
         <Slider
           min={0}
           max={100}
@@ -80,9 +98,15 @@ export const FiltersBar = ({ filters, setFilters, onApply }: FiltersProps) => {
           onChange={(v) => handleSliderChange("humidityMin", v as number)}
         />
         <p className="text-xs text-gray-500">{filters.humidityMin ?? 0}%</p>
+      </div>
 
-        <label className="text-sm font-medium mt-2 block">
+      <div>
+        <label className="text-sm font-medium flex items-center">
           Max Humidity (%)
+          <InfoIcon
+            label="humidityMax"
+            text="Upper humidity level acceptable (stickiness or moist air)."
+          />
         </label>
         <Slider
           min={0}
@@ -91,15 +115,16 @@ export const FiltersBar = ({ filters, setFilters, onApply }: FiltersProps) => {
           onChange={(v) => handleSliderChange("humidityMax", v as number)}
         />
         <p className="text-xs text-gray-500">{filters.humidityMax ?? 100}%</p>
-
-        {errors.humidity && (
-          <p className="text-xs text-red-500 mt-1">{errors.humidity}</p>
-        )}
       </div>
 
-      {/* ☁️ Weather condition */}
       <div>
-        <label className="text-sm font-medium">Weather Condition</label>
+        <label className="text-sm font-medium flex items-center">
+          Weather Condition
+          <InfoIcon
+            label="weather"
+            text="Select general weather type such as Clear, Cloudy, Rainy, or Snowy."
+          />
+        </label>
         <select
           value={filters.weatherCodes ?? ""}
           onChange={handleSelectChange}
@@ -114,15 +139,9 @@ export const FiltersBar = ({ filters, setFilters, onApply }: FiltersProps) => {
         </select>
       </div>
 
-      {/* 🔘 Apply Button */}
       <button
         onClick={onApply}
-        disabled={!!errors.temp || !!errors.humidity}
-        className={`mt-2 px-4 py-2 rounded-md text-white transition ${
-          errors.temp || errors.humidity
-            ? "bg-gray-400 cursor-not-allowed"
-            : "bg-blue-600 hover:bg-blue-700"
-        }`}
+        className="mt-2 bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition"
       >
         Apply Filters
       </button>
